@@ -7,7 +7,7 @@
         <div class="evaluation__user-left">
           <div class="evaluation__user-row">
             <label>用户名</label>
-            <span>{{userData.username}}</span>
+            <span>{{userData.name}}</span>
           </div>
           <div class="evaluation__user-row">
             <label>联系电话</label>
@@ -15,7 +15,12 @@
           </div>
         </div>
         <div class="evaluation__user-upload">
-          <cube-upload/>
+          <cube-upload
+            action="http://rj.zzx1983.com:30044/app/trash/upload"
+            :simultaneous-uploads="1"
+            auto
+            @file-success="handleSuccess"
+          />
         </div>
       </div>
       <div class="evaluation__user-row">
@@ -46,47 +51,58 @@ export default {
       data1: [
         {
           active: false,
-          name: '优秀'
+          name: '优秀',
+          type: 5
         },
         {
           active: false,
-          name: '良好'
+          name: '良好',
+          type: 4
         },
         {
           active: false,
-          name: '合格'
+          name: '合格',
+          type: 3
         },
         {
           active: false,
-          name: '一般'
+          name: '一般',
+          type: 2
         },
         {
           active: false,
-          name: '差'
+          name: '差',
+          type: 1
         }
       ],
       data2: [
         {
           active: false,
-          name: '优秀'
+          name: '优秀',
+          type: 5
         },
         {
           active: false,
-          name: '良好'
+          name: '良好',
+          type: 4
         },
         {
           active: false,
-          name: '合格'
+          name: '合格',
+          type: 3
         },
         {
           active: false,
-          name: '一般'
+          name: '一般',
+          type: 2
         },
         {
           active: false,
-          name: '差'
+          name: '差',
+          type: 1
         }
-      ]
+      ],
+      photoPath: ''
     }
   },
   computed: {
@@ -100,14 +116,38 @@ export default {
         txt: '正在提交，请稍候......'
       }).show()
 
-      setTimeout(() => {
+      // setTimeout(() => {
+      //   this.$createToast({
+      //     type: 'correct',
+      //     txt: '提交成功！'
+      //   }).show()
+
+      //   this.handleReset()
+      // }, 2000)
+
+      let one, two
+      this.data1.forEach(v => { if (v.active) one = v.type })
+      this.data2.forEach(v => { if (v.active) two = v.type })
+      console.log(one, two)
+
+      this.$http.post('/trash/addRecord', {
+        userId: this.$store.state.userData.id,
+        staffId: '',
+        recyclable: one,
+        nrecyclable: two,
+        photo: this.photoPath
+      }).then((res) => {
         this.$createToast({
           type: 'correct',
           txt: '提交成功！'
         }).show()
 
         this.handleReset()
-      }, 2000)
+
+        setTimeout(() => this.$router.push('/'), 1000)
+      }).catch((err) => {
+        console.log(err)
+      })
     },
     handleReset () {
       this.data1.forEach((value) => {
@@ -116,6 +156,9 @@ export default {
       this.data2.forEach((value) => {
         value.active = false
       })
+    },
+    handleSuccess (file) {
+      this.photoPath = file.response.data
     }
   },
   components: {

@@ -28,8 +28,10 @@ export default {
         this.data.forEach(element => {
           element.active = false
         })
+        item.active = true
+      } else {
+        item.active = false
       }
-      item.active = true
     }
   }
 }

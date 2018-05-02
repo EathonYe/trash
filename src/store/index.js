@@ -10,12 +10,13 @@ export default new Vuex.Store({
   state: {
     trashNum: '',
     userData: {
-      username: '方名',
-      phone: '13003671139',
-      address: '现代景苑'
+      name: '',
+      phone: '',
+      address: ''
     },
-    pages: 0,
-    total: 50,
+    pageNo: 1,
+    pageSize: 10,
+    total: 10,
     listData: []
   },
   mutations: {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     setListData (state, data) {
       state.listData = state.listData.concat(data)
+    },
+    setTotal (state, data) {
+      state.total = data
     }
   },
   actions: {
@@ -42,18 +46,31 @@ export default new Vuex.Store({
       })
     },
     getListData (context) {
-      if (context.state.pages < 5) {
-        const data = []
-        for (let i = 1; i <= 10; i++) {
-          data.push({
-            id: context.state.pages * 10 + i,
-            item: {
-              text: `这是第${context.state.pages * 10 + i}个评价`
-            }
-          })
-        }
-        context.state.pages += 1
-        context.commit('setListData', data)
+      // if (context.state.pages < 5) {
+      //   const data = []
+      //   for (let i = 1; i <= 10; i++) {
+      //     data.push({
+      //       id: context.state.pages * 10 + i,
+      //       item: {
+      //         text: `这是第${context.state.pages * 10 + i}个评价`
+      //       }
+      //     })
+      //   }
+      //   context.state.pages += 1
+      //   context.commit('setListData', data)
+      // }
+
+      if (context.state.listData.length < context.state.total) {
+        axios.post('/trash/getRecord', {
+          pageNo: context.state.pageNo,
+          pageSize: context.state.pageSize
+        }).then((res) => {
+          context.commit('setListData', res.data.data)
+          context.commit('setTotal', res.data.total)
+          context.state.pageNo = context.state.pageNo + 1
+        }).catch((err) => {
+          console.log(err)
+        })
       }
     }
   }

@@ -35,6 +35,7 @@ import {
 import App from './App'
 import router from './router'
 import store from './store'
+import axios from 'axios'
 
 Vue.use(Button)
 Vue.use(CheckboxGroup)
@@ -59,6 +60,8 @@ Vue.use(IndexList)
 Vue.use(Swipe)
 Vue.use(Upload)
 
+axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/app'
+Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

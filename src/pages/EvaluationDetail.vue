@@ -4,24 +4,32 @@
 
     <div class="detail">
       <div class="row">
-        <label for="">姓名：</label>
-        <span>{{detailData.item.text}}</span>
+        <label for="">检查人员：</label>
+        <span>{{detailData.staffName}}</span>
       </div>
       <div class="row">
+        <label for="">住户姓名：</label>
+        <span>{{detailData.userName}}</span>
+      </div>
+      <!-- <div class="row">
         <label for="">联系电话：</label>
-        <span></span>
+        <span>{{detailData.phone}}</span>
       </div>
       <div class="row">
         <label for="">家庭住址：</label>
-        <span></span>
-      </div>
+        <span>{{detailData.address}}</span>
+      </div> -->
       <div class="row">
         <label for="">厨余垃圾：</label>
-        <span></span>
+        <span>{{computedRecyclable}}</span>
       </div>
       <div class="row">
         <label for="">其他垃圾：</label>
-        <span></span>
+        <span>{{computedNrecyclable}}</span>
+      </div>
+      <div class="row">
+        <label for="">照片：</label>
+        <img :src="detailData.photo" alt="">
       </div>
     </div>
   </div>
@@ -34,6 +42,24 @@ export default {
   computed: {
     detailData () {
       return this.$store.state.listData[this.$route.params.id]
+    },
+    computedRecyclable () {
+      switch (this.detailData.recyclable) {
+        case 1: return '差'
+        case 2: return '一般'
+        case 3: return '合格'
+        case 4: return '良好'
+        case 5: return '优秀'
+      }
+    },
+    computedNrecyclable () {
+      switch (this.detailData.nrecyclable) {
+        case 1: return '差'
+        case 2: return '一般'
+        case 3: return '合格'
+        case 4: return '良好'
+        case 5: return '优秀'
+      }
     }
   },
   components: {

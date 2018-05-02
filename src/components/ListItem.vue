@@ -1,7 +1,8 @@
 <template>
-  <router-link :to="/evaluationdetail/ + item.id">
+  <router-link :to="/evaluationdetail/ + $attrs.index">
     <div class="list-item">
-      {{item.item.text}}
+      住户姓名：{{item.userName}}&nbsp;&nbsp;
+      检查人员: {{item.staffName}}
     </div>
   </router-link>  
 </template>
@@ -14,6 +15,8 @@ export default {
       type: Object,
       required: true
     }
+  },
+  mounted () {
   }
 }
 </script>
