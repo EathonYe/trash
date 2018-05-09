@@ -36,14 +36,36 @@ export default {
         txt: this.toastTxt
       }).show()
 
-      this.$store.dispatch('getUserData').then(() => {
-        this.$router.push('/evaluation')
-      }).catch((error) => {
-        console.error('getUserData', error)
+      this.$http.get('/trash/getUser', {
+        params: {
+          trashId: this.$store.state.trashNum
+        }
+      }).then((res) => {
+        if (res.data.data) {
+          this.$store.commit('setUserData', res.data.data)
+          this.$router.push('/evaluation')
+        } else {
+          this.$createToast({
+            type: 'error',
+            txt: '未查询到该编号的信息'
+          }).show()
+        }
+      }).catch((err) => {
         this.$createToast({
           txt: '未查询到该编号的信息'
         }).show()
+        console.log(err)
       })
+
+      // this.$store.dispatch('getUserData').then((res) => {
+      //   console.log(res)
+      //   this.$router.push('/evaluation')
+      // }).catch((error) => {
+      //   console.error('getUserData', error)
+      //   this.$createToast({
+      //     txt: '未查询到该编号的信息'
+      //   }).show()
+      // })
       // setTimeout(() => {
       //   this.$router.push('/evaluation')
       // }, 1000)
