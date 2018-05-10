@@ -36,26 +36,34 @@ export default {
         txt: this.toastTxt
       }).show()
 
-      this.$http.get('/trash/getUser', {
-        params: {
-          trashId: this.$store.state.trashNum
-        }
-      }).then((res) => {
-        if (res.data.data) {
-          this.$store.commit('setUserData', res.data.data)
-          this.$router.push('/evaluation')
-        } else {
+      if (this.trashNum) {
+        this.$http.get('/trash/getUser', {
+          params: {
+            trashId: this.$store.state.trashNum
+          }
+        }).then((res) => {
+          if (res.data.data) {
+            this.$store.commit('setUserData', res.data.data)
+            this.$router.push('/evaluation')
+          } else {
+            this.$createToast({
+              type: 'error',
+              txt: '未查询到该编号的信息'
+            }).show()
+          }
+        }).catch((err) => {
           this.$createToast({
             type: 'error',
             txt: '未查询到该编号的信息'
           }).show()
-        }
-      }).catch((err) => {
+          console.log(err)
+        })
+      } else {
         this.$createToast({
-          txt: '未查询到该编号的信息'
+          type: 'error',
+          txt: '请输入垃圾桶编号'
         }).show()
-        console.log(err)
-      })
+      }
 
       // this.$store.dispatch('getUserData').then((res) => {
       //   console.log(res)
