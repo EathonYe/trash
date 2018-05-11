@@ -16,7 +16,7 @@
         </div>
         <div class="evaluation__user-upload">
           <cube-upload
-            action="http://rj.zzx1983.com:30044/app/trash/upload"
+            action="http://rj.zzx1983.com:30044/weixin/upload"
             :simultaneous-uploads="1"
             auto
             @file-success="handleSuccess"
@@ -26,6 +26,14 @@
       <div class="evaluation__user-row">
         <label>家庭住址</label>
         <span>{{userData.address}}</span>
+      </div>
+      <div class="evaluation__user-row">
+        <label>垃圾重量</label>
+        <cube-input
+          class="evaluation__input--weight"
+          v-model="weight"
+          placeholder="请输入垃圾重量">
+        </cube-input>
       </div>
     </div>
 
@@ -102,7 +110,8 @@ export default {
           type: 1
         }
       ],
-      photoPath: ''
+      photoPath: '',
+      weight: ''
     }
   },
   computed: {
@@ -130,24 +139,32 @@ export default {
       this.data2.forEach(v => { if (v.active) two = v.type })
       console.log(one, two)
 
-      this.$http.post('/trash/addRecord', {
-        userId: this.$store.state.userData.id,
-        staffId: '',
-        recyclable: one,
-        nrecyclable: two,
-        photo: this.photoPath
-      }).then((res) => {
+      if (one && two) {
+        this.$http.post('/addRecord', {
+          userId: this.$store.state.userData.id,
+          staffId: this.$store.state.staff.staffId,
+          recyclable: one,
+          nrecyclable: two,
+          weight: this.weight,
+          photo: this.photoPath
+        }).then((res) => {
+          this.$createToast({
+            type: 'correct',
+            txt: '提交成功！'
+          }).show()
+
+          this.handleReset()
+
+          setTimeout(() => this.$router.push('/search'), 1000)
+        }).catch((err) => {
+          console.log(err)
+        })
+      } else {
         this.$createToast({
-          type: 'correct',
-          txt: '提交成功！'
+          type: 'error',
+          txt: '请评价！！！'
         }).show()
-
-        this.handleReset()
-
-        setTimeout(() => this.$router.push('/'), 1000)
-      }).catch((err) => {
-        console.log(err)
-      })
+      }
     },
     handleReset () {
       this.data1.forEach((value) => {
@@ -237,5 +254,8 @@ export default {
 /*submit*/
 .evaluation__submit {
   margin: 30px 10px;
+}
+.evaluation .evaluation__input--weight {
+  display: inline-block;
 }
 </style>

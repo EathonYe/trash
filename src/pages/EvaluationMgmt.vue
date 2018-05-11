@@ -27,9 +27,9 @@ export default {
   methods: {
     scrollMethod () {
       const sumH = document.documentElement.scrollHeight || document.body.scrollHeight
-      const viewH = document.documentElement.clientHeight
-      const scrollH = document.body.scrollTop || document.documentElement.scrollTop
-      if (viewH + scrollH + 1 >= sumH) {
+      const viewH = document.documentElement.clientHeight || document.body.clientHeight
+      const scrollH = document.documentElement.scrollTop || document.body.scrollTop
+      if (viewH + scrollH + 20 >= sumH) {
         this.getListData()
       }
     },

@@ -28,6 +28,10 @@
         <span>{{computedNrecyclable}}</span>
       </div>
       <div class="row">
+        <label for="">垃圾重量：</label>
+        <span>{{detailData.weight}}</span>
+      </div>
+      <div class="row">
         <label for="">照片：</label>
         <img :src="detailData.photo" alt="">
       </div>

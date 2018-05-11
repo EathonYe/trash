@@ -4,10 +4,12 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/app'
+axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
 
 export default new Vuex.Store({
   state: {
+    staff: {
+    },
     trashNum: '',
     userData: {
       name: '',
@@ -20,6 +22,9 @@ export default new Vuex.Store({
     listData: []
   },
   mutations: {
+    setStaff (state, data) {
+      state.staff = data
+    },
     updateTrashNum (state, data) {
       state.trashNum = data
     },
@@ -35,7 +40,7 @@ export default new Vuex.Store({
   },
   actions: {
     getUserData (context) {
-      axios.get('/trash/getUser', {
+      axios.get('/getUser', {
         params: {
           trashId: context.state.trashNum
         }
@@ -61,7 +66,7 @@ export default new Vuex.Store({
       // }
 
       if (context.state.listData.length < context.state.total) {
-        axios.post('/trash/getRecord', {
+        axios.post('/getRecord', {
           pageNo: context.state.pageNo,
           pageSize: context.state.pageSize
         }).then((res) => {

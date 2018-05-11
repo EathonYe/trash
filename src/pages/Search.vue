@@ -37,7 +37,7 @@ export default {
       }).show()
 
       if (this.trashNum) {
-        this.$http.get('/trash/getUser', {
+        this.$http.get('/getUser', {
           params: {
             trashId: this.$store.state.trashNum
           }

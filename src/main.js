@@ -60,7 +60,7 @@ Vue.use(IndexList)
 Vue.use(Swipe)
 Vue.use(Upload)
 
-axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/app'
+axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
