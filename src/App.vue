@@ -16,7 +16,9 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      if (to.path === '/') {
+      if (from.path === '/') {
+        this.transitionName = 'slide-left'
+      } else if (to.path === '/' || to.path === '/search') {
         this.transitionName = 'slide-right'
       } else {
         this.transitionName = 'slide-left'
