@@ -24,6 +24,22 @@ export default {
         this.transitionName = 'slide-left'
       }
     }
+  },
+  created () {
+    this.$http.get('/query')
+      .then(res => {
+        if (res.data.data) {
+          this.$store.commit('setStaff', res.data.data)
+          if (res.data.data.role === 1) {
+            this.$router.push('/evaluationMgmt')
+          } else {
+            this.$router.push('/search')
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 }
 </script>
