@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import Login from '@/pages/Login'
 import Search from '@/pages/Search'
 import Evaluation from '@/pages/Evaluation'
 import EvaluationMgmt from '@/pages/EvaluationMgmt'
@@ -17,6 +18,11 @@ export default new Router({
     },
     {
       path: '/',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/search',
       name: 'Search',
       component: Search
     },
