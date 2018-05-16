@@ -26,7 +26,11 @@ export default {
     }
   },
   created () {
-    this.$http.get('/query')
+    this.$http.get('/query', {
+      params: {
+        openId: this.$getQueryString('openId')
+      }
+    })
       .then(res => {
         if (res.data.data) {
           this.$store.commit('setStaff', res.data.data)
