@@ -1,8 +1,9 @@
 <template>
   <div style="overflow-x: hidden;">
-    <Header title="评价管理" />
+    <Header title="评价管理" :showBack="false" />
     <div class="list">
       <list-item v-for="(item, index) in listData" :item="item" :key="item.id" :index="index" />
+      <cube-button @click="getListData" v-show="!showEnd">加载更多</cube-button>
       <div class="show-end" v-show="showEnd">到底啦~~~</div>
     </div>
   </div>
@@ -16,7 +17,8 @@ export default {
   name: 'EvaluationMgmt',
   data () {
     return {
-      showEnd: false
+      showEnd: false,
+      isXHR: false
     }
   },
   computed: {
@@ -25,19 +27,21 @@ export default {
     }
   },
   methods: {
-    scrollMethod () {
-      const sumH = document.documentElement.scrollHeight || document.body.scrollHeight
-      const viewH = document.documentElement.clientHeight || document.body.clientHeight
-      const scrollH = document.documentElement.scrollTop || document.body.scrollTop
-      if (viewH + scrollH + 20 >= sumH) {
-        this.getListData()
-      }
-    },
+    // scrollMethod () {
+    //   const sumH = document.documentElement.scrollHeight || document.body.scrollHeight
+    //   const viewH = document.documentElement.clientHeight || document.body.clientHeight
+    //   const scrollH = document.documentElement.scrollTop || document.body.scrollTop
+    //   if (!this.isXHR && viewH + scrollH + 1 >= sumH) {
+    //     this.isXHR = true
+    //     this.getListData()
+    //   }
+    // },
     getListData () {
       this.$store.dispatch('getListData').then(() => {
         if (this.$store.state.listData.length === this.$store.state.total) {
           this.showEnd = true
         }
+        this.isXHR = false
       })
     }
   },
@@ -48,15 +52,17 @@ export default {
   created () {
   },
   mounted () {
-    document.addEventListener('scroll', this.scrollMethod)
-    if (this.$store.state.listData.length === 0) {
-      this.getListData()
-    } else if (this.$store.state.listData.length === this.$store.state.total) {
-      this.showEnd = true
-    }
+    // document.addEventListener('scroll', this.scrollMethod)
+    // if (this.$store.state.listData.length === 0) {
+    //   this.getListData()
+    // } else if (this.$store.state.listData.length === this.$store.state.total) {
+    //   this.showEnd = true
+    // }
+    this.getListData()
   },
   destroyed () {
-    document.removeEventListener('scroll', this.scrollMethod)
+    // document.removeEventListener('scroll', this.scrollMethod)
+    this.$store.commit('setListData', [])
   }
 }
 </script>
