@@ -4,7 +4,8 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
+// axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
+axios.defaults.baseURL = 'http://srk.118448.com/weixin'
 
 export default new Vuex.Store({
   state: {
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     },
     setTotal (state, data) {
       state.total = data
+    },
+    setPageNo (state, data) {
+      state.pageNo = data
     }
   },
   actions: {
@@ -72,7 +76,7 @@ export default new Vuex.Store({
         }).then((res) => {
           context.commit('setListData', res.data.data)
           context.commit('setTotal', res.data.total)
-          context.state.pageNo = context.state.pageNo + 1
+          context.commit('setPageNo', context.state.pageNo + 1)
         }).catch((err) => {
           console.log(err)
         })
