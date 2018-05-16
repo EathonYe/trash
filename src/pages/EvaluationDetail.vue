@@ -33,7 +33,7 @@
       </div>
       <div class="row">
         <label for="">照片：</label>
-        <img :src="detailData.photo" alt="">
+        <img :src="detailData.photo" alt="" width="100%">
       </div>
     </div>
   </div>
