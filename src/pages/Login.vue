@@ -41,7 +41,8 @@ export default {
 
       this.$http.post('/bindUser', {
         staffId: this.form.staffId,
-        password: this.form.password
+        password: this.form.password,
+        openId: this.$getQueryString('openId')
       }).then((res) => {
         if (res.data.data) {
           this.$store.commit('setStaff', res.data.data)
@@ -63,15 +64,6 @@ export default {
         }).show()
         console.log(err)
       })
-    },
-    getQueryString (str) {
-      const arr = location.search.substring(1).split('&')
-      for (let i = 0; i < arr.length; i++) {
-        const index = arr[i].indexOf(str)
-        if (index > -1) {
-          return arr[i].substring(index + str.length + 1)
-        }
-      }
     }
   },
   mounted () {
