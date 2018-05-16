@@ -7,7 +7,7 @@
     clearable
     autofocus>
   </cube-input>
-  <cube-button primary icon="cubeic-search" @click="showToast">Search</cube-button>
+  <cube-button primary icon="cubeic-search" @click="showToast">搜索</cube-button>
   </div>  
 </div>
 </template>
