@@ -1,6 +1,7 @@
 <template>
   <div class="header">
-    <i 
+    <i
+      v-if="showBack"
       class="cubeic-back"
       @click="$router.go(-1)"></i>
     <span>{{title}}</span>
@@ -13,6 +14,10 @@ export default {
   props: {
     title: {
       type: String
+    },
+    showBack: {
+      type: Boolean,
+      default: true
     }
   }
 }
