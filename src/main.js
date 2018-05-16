@@ -61,7 +61,8 @@ Vue.use(Swipe)
 Vue.use(Upload)
 
 // axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
-axios.defaults.baseURL = 'http://srk.118448.com/weixin'
+// axios.defaults.baseURL = 'http://srk.118448.com/weixin'
+axios.defaults.baseURL = 'http://localhost:8080/weixin'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
 Vue.prototype.$getQueryString = function (str) {

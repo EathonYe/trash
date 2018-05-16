@@ -5,7 +5,8 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 // axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
-axios.defaults.baseURL = 'http://srk.118448.com/weixin'
+// axios.defaults.baseURL = 'http://srk.118448.com/weixin'
+axios.defaults.baseURL = 'http://localhost:8080/weixin'
 
 export default new Vuex.Store({
   state: {
@@ -18,7 +19,7 @@ export default new Vuex.Store({
       address: ''
     },
     pageNo: 1,
-    pageSize: 10,
+    pageSize: 15,
     total: 10,
     listData: []
   },
