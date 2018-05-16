@@ -16,7 +16,7 @@
         </div>
         <div class="evaluation__user-upload">
           <cube-upload
-            action="http://rj.zzx1983.com:30044/weixin/upload"
+            action="http://srk.118448.com/weixin/upload"
             :simultaneous-uploads="1"
             auto
             @file-success="handleSuccess"
