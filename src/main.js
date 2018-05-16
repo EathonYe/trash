@@ -60,9 +60,19 @@ Vue.use(IndexList)
 Vue.use(Swipe)
 Vue.use(Upload)
 
-axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
+// axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
+axios.defaults.baseURL = 'http://srk.118448.com/weixin'
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
+Vue.prototype.$getQueryString = function (str) {
+  const arr = location.search.substring(1).split('&')
+  for (let i = 0; i < arr.length; i++) {
+    const index = arr[i].indexOf(str)
+    if (index > -1) {
+      return arr[i].substring(index + str.length + 1)
+    }
+  }
+}
 
 /* eslint-disable no-new */
 new Vue({
