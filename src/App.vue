@@ -65,19 +65,19 @@ html, body {
 }
 
 .router-view {
-      position: absolute;
-      left: 0px;
-      top: 0px;
-      width: 100%;
-      /* height: auto; */
-      transition: all .5s cubic-bezier(.55,0,.1,1);
-    }
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  /* height: auto; */
+  transition: all .5s cubic-bezier(.55,0,.1,1);
+}
 .slide-left-enter, .slide-right-leave-active {
-      opacity: 0;
-      transform: translate(60px, 0);
-    }
-    .slide-left-leave-active, .slide-right-enter {
-      opacity: 0;
-      transform: translate(-60px, 0);
-    }
+  opacity: 0;
+  transform: translate(60px, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+  opacity: 0;
+  transform: translate(-60px, 0);
+}
 </style>
