@@ -62,9 +62,13 @@ Vue.use(Upload)
 
 // axios.defaults.baseURL = 'http://rj.zzx1983.com:30044/weixin'
 // axios.defaults.baseURL = 'http://srk.118448.com/weixin'
-axios.defaults.baseURL = 'http://localhost:3000'
+const baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = baseURL
 Vue.prototype.$http = axios
+Vue.prototype.$_preUrl = baseURL
+
 Vue.config.productionTip = false
+
 Vue.prototype.$getQueryString = function (str) {
   const arr = location.search.substring(1).split('&')
   for (let i = 0; i < arr.length; i++) {

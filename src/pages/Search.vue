@@ -37,18 +37,19 @@ export default {
       }).show()
 
       if (this.trashNum) {
-        this.$http.get('/getUser', {
+        this.$http.get('/trash', {
           params: {
             trashId: this.$store.state.trashNum
           }
         }).then((res) => {
-          if (res.data.data) {
-            this.$store.commit('setUserData', res.data.data)
+          if (res.data.status) {
+            this.$store.commit('setUserData', res.data.data.manager)
             this.$router.push('/evaluation')
           } else {
             this.$createToast({
               type: 'error',
-              txt: '未查询到该编号的信息'
+              // txt: '未查询到该编号的信息'
+              txt: res.data.message
             }).show()
           }
         }).catch((err) => {

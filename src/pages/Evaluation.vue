@@ -16,7 +16,7 @@
         </div>
         <div class="evaluation__user-upload">
           <cube-upload
-            action="http://srk.118448.com/weixin/upload"
+            :action="uploadUrl"
             :simultaneous-uploads="1"
             auto
             @file-success="handleSuccess"
@@ -33,7 +33,7 @@
           class="evaluation__input--weight"
           v-model="weight"
           placeholder="请输入垃圾重量">
-        </cube-input>
+        </cube-input>&nbsp;&nbsp;KG
       </div>
     </div>
 
@@ -117,6 +117,9 @@ export default {
   computed: {
     userData () {
       return this.$store.state.userData
+    },
+    uploadUrl () {
+      return `${this.$_preUrl}/upload`
     }
   },
   methods: {

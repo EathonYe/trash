@@ -10,9 +10,12 @@ axios.defaults.baseURL = 'http://localhost:8080/weixin'
 
 export default new Vuex.Store({
   state: {
+    // 登录用户信息
     staff: {
     },
+    // 当前垃圾桶编号
     trashNum: '',
+    // 住户信息
     userData: {
       name: '',
       phone: '',
