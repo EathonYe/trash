@@ -143,22 +143,27 @@ export default {
       console.log(one, two)
 
       if (one && two) {
-        this.$http.post('/addRecord', {
-          userId: this.$store.state.userData.id,
-          staffId: this.$store.state.staff.staffId,
+        this.$http.post('/scorerecord', {
+          resident: this.$store.state.userData._id,
+          staff: this.$store.state.staff._id,
           recyclable: one,
           nrecyclable: two,
           weight: this.weight,
           photo: this.photoPath
         }).then((res) => {
-          this.$createToast({
-            type: 'correct',
-            txt: '提交成功！'
-          }).show()
-
-          this.handleReset()
-
-          setTimeout(() => this.$router.push('/search'), 1000)
+          if (res.data.status) {
+            this.$createToast({
+              type: 'correct',
+              txt: '提交成功！'
+            }).show()
+            this.handleReset()
+            setTimeout(() => this.$router.push('/search'), 1000)
+          } else {
+            this.$createToast({
+              type: 'error',
+              txt: res.data.message
+            })
+          }
         }).catch((err) => {
           console.log(err)
         })

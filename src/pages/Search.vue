@@ -43,7 +43,7 @@ export default {
           }
         }).then((res) => {
           if (res.data.status) {
-            this.$store.commit('setUserData', res.data.data.manager)
+            this.$store.commit('setUserData', res.data.data.resident)
             this.$router.push('/evaluation')
           } else {
             this.$createToast({

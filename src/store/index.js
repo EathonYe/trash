@@ -74,7 +74,7 @@ export default new Vuex.Store({
       // }
 
       if (context.state.listData.length < context.state.total) {
-        axios.post('/getRecord', {
+        axios.get('/scorerecord', {
           pageNo: context.state.pageNo,
           pageSize: context.state.pageSize
         }).then((res) => {

@@ -1,8 +1,8 @@
 <template>
   <router-link :to="/evaluationdetail/ + $attrs.index">
     <div class="list-item">
-      住户姓名：{{item.userName}}&nbsp;&nbsp;
-      检查人员: {{item.staffName}}
+      住户姓名：{{item.resident.name}}&nbsp;&nbsp;
+      检查人员: {{item.staff.name}}
     </div>
   </router-link>  
 </template>

@@ -2,7 +2,7 @@
   <div style="overflow-x: hidden;">
     <Header title="评价管理" :showBack="false" />
     <div class="list">
-      <list-item v-for="(item, index) in listData" :item="item" :key="item.id" :index="index" />
+      <list-item v-for="(item, index) in listData" :item="item" :key="item._id" :index="index" />
       <!-- <cube-button @click="getListData" v-show="!showEnd">加载更多</cube-button> -->
       <div class="show-end" v-show="showEnd">到底啦~~~</div>
     </div>

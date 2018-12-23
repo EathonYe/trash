@@ -5,11 +5,11 @@
     <div class="detail">
       <div class="row">
         <label for="">检查人员：</label>
-        <span>{{detailData.staffName}}</span>
+        <span>{{detailData.staff.name}}</span>
       </div>
       <div class="row">
         <label for="">住户姓名：</label>
-        <span>{{detailData.userName}}</span>
+        <span>{{detailData.resident.name}}</span>
       </div>
       <!-- <div class="row">
         <label for="">联系电话：</label>
@@ -33,7 +33,7 @@
       </div>
       <div class="row">
         <label for="">照片：</label>
-        <img :src="detailData.photo" alt="" width="100%">
+        <img :src="photoPath" alt="" width="100%">
       </div>
     </div>
   </div>
@@ -64,6 +64,9 @@ export default {
         case 4: return '良好'
         case 5: return '优秀'
       }
+    },
+    photoPath () {
+      return this.$_preUrl + this.detailData.photo
     }
   },
   components: {
